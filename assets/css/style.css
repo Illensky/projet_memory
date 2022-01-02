@@ -8,6 +8,7 @@ html {
 .grid {
     display: flex;
     flex-wrap: wrap;
-    height: 300px;
-    width: 400px;
+    margin: 15vh 15vw;
+    height: 70vh;
+    width: 70vw;
 }

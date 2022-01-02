@@ -46,7 +46,7 @@ const cardsArray = [
     {
         name: 'ps',
         img: 'assets/img/ps.png'
-    }/*,
+    },
     {
         name: 'py',
         img: 'assets/img/py.png'
@@ -78,7 +78,7 @@ const cardsArray = [
     {
         name: 'w',
         img: 'assets/img/w.png'
-    },*/
+    }
 ];
 
 cardsArray.sort(() => 0.5 - Math.random())
