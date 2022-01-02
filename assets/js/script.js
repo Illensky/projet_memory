@@ -1,56 +1,137 @@
-// create a array of image URL
-
-const images = [
-    "assets/img/css.png",
-    "assets/img/cube.png",
-    "assets/img/jq.png",
-    "assets/img/node.png",
-    "assets/img/php.png",
-    "assets/img/ps.png",
-    "assets/img/py.png",
-    "assets/img/s.png",
-    "assets/img/sass.png",
-    "assets/img/w.png"
+const cardsArray = [
+    {
+        name: 'css',
+        img: 'assets/img/css.png'
+    },
+    {
+        name: 'css',
+        img: 'assets/img/css.png'
+    },
+    {
+        name: 'cube',
+        img: 'assets/img/cube.png'
+    },
+    {
+        name: 'cube',
+        img: 'assets/img/cube.png'
+    },
+    {
+        name: 'jq',
+        img: 'assets/img/jq.png'
+    },
+    {
+        name: 'jq',
+        img: 'assets/img/jq.png'
+    },
+    {
+        name: 'node',
+        img: 'assets/img/node.png'
+    },
+    {
+        name: 'node',
+        img: 'assets/img/node.png'
+    },
+    {
+        name: 'php',
+        img: 'assets/img/php.png'
+    },
+    {
+        name: 'php',
+        img: 'assets/img/php.png'
+    },
+    {
+        name: 'ps',
+        img: 'assets/img/ps.png'
+    },
+    {
+        name: 'ps',
+        img: 'assets/img/ps.png'
+    }/*,
+    {
+        name: 'py',
+        img: 'assets/img/py.png'
+    },
+    {
+        name: 'py',
+        img: 'assets/img/py.png'
+    },
+    {
+        name: 's',
+        img: 'assets/img/s.png'
+    },
+    {
+        name: 's',
+        img: 'assets/img/s.png'
+    },
+    {
+        name: 'sass',
+        img: 'assets/img/sass.png'
+    },
+    {
+        name: 'sass',
+        img: 'assets/img/sass.png'
+    },
+    {
+        name: 'w',
+        img: 'assets/img/w.png'
+    },
+    {
+        name: 'w',
+        img: 'assets/img/w.png'
+    },*/
 ];
 
+cardsArray.sort(() => 0.5 - Math.random())
 
-//get the usefull html elements
+const grid = document.querySelector(".grid");
+const resultDisplay = document.querySelector("#result")
+let cardsChosen = [];
+let cardsChosenId = [];
+let cardsWon = [];
 
-const container = document.querySelector('body');
+//create the bord
 
-// initialize a array to store the already given number of the getrandom function
-
-let alreadyUsedNumber = [];
-
-function getRandom() {
-    const random = Math.trunc(Math.random() *(images.length *2))
-    if (alreadyUsedNumber.includes(random)) {
-        return getRandom();
+function createBoard(gameCardArray, gameBoard) {
+    for (let i = 0; i < gameCardArray.length; i++) {
+        let card = document.createElement('img');
+        card.setAttribute('src', 'assets/img/blank.png');
+        card.setAttribute('data-id', i);
+        card.addEventListener('click', flipCard);
+        gameBoard.appendChild(card);
     }
-    alreadyUsedNumber.push(random);
-    return random;
 }
 
-
-// create 2 div by image
-
-for (let i = 0; i <= images.length*2; i++) {
-    const imageDiv = document.createElement("div");
-    imageDiv.style.width = "130px";
-    imageDiv.style.height = "130px";
-    imageDiv.id = "div" + i.toString();
-    container.appendChild(imageDiv);
+function checkForMatch() {
+    let cards = document.querySelectorAll('img');
+    const optionOneId = cardsChosenId[0];
+    const optionTwoId = cardsChosenId[1];
+    if (cardsChosen[0] === cardsChosen[1]){
+        cards[optionOneId].setAttribute('src', 'assets/img/white.png');
+        cards[optionTwoId].setAttribute('src', 'assets/img/white.png');
+        cardsWon.push(cardsChosen);
+        alert('You found a match');
+    }
+    else {
+        cards[optionOneId].setAttribute('src', 'assets/img/blank.png');
+        cards[optionTwoId].setAttribute('src', 'assets/img/blank.png');
+        alert('Try again !')
+    }
+    cardsChosen = [];
+    cardsChosenId = [];
+    resultDisplay.innerHTML = cardsWon.length.toString()
+    if (cardsWon.length === cardsArray.length/2) {
+        resultDisplay.innerHTML = "you win !!"
+    }
 }
 
-
-// set background image randomly to two div by image and add theme the same class
-
-for (let image of images) {
-    const one = document.querySelector("#div" + getRandom().toString());
-    one.classList = image;
-    one.style.backgroundImage = `url("` + image + `")`;
-
-    const two = document.querySelector("#div" + getRandom().toString());
-    two.classList = image;
-    two.style.backgroundImage = `url("` + image + `")`;
+function flipCard() {
+    let cardId = this.getAttribute('data-id');
+    cardsChosen.push(cardsArray[cardId].name);
+    cardsChosenId.push(cardId);
+    this.setAttribute('src', cardsArray[cardId].img)
+    if (cardsChosen.length === 2) {
+        setTimeout(checkForMatch, 500)
+    }
 }
+
+createBoard(cardsArray, grid)
