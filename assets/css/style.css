@@ -5,13 +5,18 @@ html {
     font-size: 62.5%;
     text-align: center;
     background-color: rgba(0, 0, 0, 0.71);
+    color: white;
+    font-family: sans-serif;
 }
 
 .grid {
     display: flex;
     flex-wrap: wrap;
     margin: 15vh auto;
-    width: 650px;
+    width: 700px;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #D8D2E1;
 }
 
 img {
@@ -19,9 +24,34 @@ img {
     height : 130px;
     padding : 5px;
     cursor : pointer;
-    box-shadow: 0px 0px 50px 1px #FFFFFF;
+    border-radius: 10px;
 }
 
 #game, #score {
     display: none;
+}
+
+button {
+    width: 200px;
+    height: 75px;
+    font-size: 3rem;
+    background-color: white;
+    border: none;
+    border-radius: 15px;
+    color : rgba(0, 0, 0, 0.71);
+    font-family: sans-serif;
+    font-weight: bolder;
+    box-shadow: 0px 0px 35px 5px #000000;
+    cursor: pointer;
+}
+
+h1 {
+    font-size: 3rem;
+    color: rgb(255, 255, 255);
+    padding: 10px;
+}
+
+p, ul {
+    font-size: 2rem;
+    padding: 10px;
 }

@@ -22,7 +22,7 @@ const cardsArray = [
     {
         name: 'jq',
         img: 'assets/img/jq.png'
-    },/*
+    },
     {
         name: 'node',
         img: 'assets/img/node.png'
@@ -78,7 +78,7 @@ const cardsArray = [
     {
         name: 'w',
         img: 'assets/img/w.png'
-    }*/
+    }
 ];
 
 
@@ -124,6 +124,7 @@ function checkForMatch() {
         cards[optionTwoId].setAttribute('src', 'assets/img/blank.png');
         info.innerHTML = "Essayez encore !!"
     }
+    setTimeout(() => info.innerHTML = " ", 1000)
     cardsChosen = [];
     cardsChosenId = [];
     tryCounter++;
